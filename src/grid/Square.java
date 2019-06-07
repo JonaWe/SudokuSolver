@@ -8,22 +8,37 @@ import java.util.LinkedList;
  */
 
 public class Square {
-    private int number;
-    private LinkedList<Integer> possibilities;
+    private int number = -1;
+    private boolean initial = false;
 
     Square(){
 
     }
 
     Square(int number){
-        this.number = number;
+        if (number >= 0 && number <= 9){
+            initial = true;
+            this.number = number;
+        }
     }
 
     public int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public String toString(){
+        if (number == -1) return " ";
+        else return String.valueOf(number);
+    }
+
+    public boolean setNumber(int number) {
+        if (number >= -1 && number <= 9){
+            this.number = number;
+            return true;
+        } else return false;
+    }
+
+    public boolean isInitial() {
+        return initial;
     }
 }
