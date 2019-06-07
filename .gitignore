@@ -1,0 +1,16 @@
+*.idea
+*.iml
+
+.idea
+out
+
+*.class
+*.log
+.mtj.tmp/
+
+*.jar
+*.war
+*.esr
+*.zip
+*.tar.gz
+*.rar
