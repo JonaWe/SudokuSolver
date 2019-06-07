@@ -1,7 +1,5 @@
 import grid.Grid;
 
-import java.util.LinkedList;
-
 /**
  * created by Jona Wessendorf
  * on 04.06.2019
@@ -10,7 +8,7 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
         Grid g = new Grid();
-        g.addGrid(new int[][]{
+        g.createGrid(new int[][]{
                 {-1, 3, -1, -1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, 1, 9, 5, -1, -1, -1},
                 {-1, -1, 8, -1, -1, -1, -1, 6, -1},
@@ -18,9 +16,24 @@ public class Main {
                 {4, -1, -1, 8, -1, -1, -1, -1, 1},
                 {-1, -1, -1, -1, 2, -1, -1, -1, -1},
                 {-1, 6, -1, -1, -1, -1, 2, 8, -1},
-                {-1, -1, -1, 4, 1, 8, -1, -1, 5},
+                {-1, -1, -1, 4, 1, 9, -1, -1, 5},
                 {-1, -1, -1, -1, -1, -1, -1, 7, -1}
         });
-        g.printGrid();
+
+        /*g.createGrid(new int[][]{{1, 3, 1, 1, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 9, 5, 1, 1, 1},
+                {1, 1, 8, 1, 1, 1, 1, 6, 1},
+                {8, 1, 1, 1, 6, 1, 1, 1, 1},
+                {4, 1, 1, 8, 1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 2, 1, 1, 1, 1},
+                {1, 6, 1, 1, 1, 1, 2, 8, 1},
+                {1, 1, 1, 4, 1, 8, 1, 1, 5},
+                {1, 1, 1, 1, 1, 1, 1, 7, 1}
+    });*/
+
+        Solver s = new Solver();
+        if (s.solve(g)) s.getSolved().printGrid();
+        else System.out.println("Sudoku is not solvable!");
+
     }
 }
