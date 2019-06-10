@@ -1,13 +1,11 @@
-import grid.Grid;
-
-
 /**
  * created by Jona Wessendorf
  * on 07.06.2019
  */
 
 public class Solver {
-    private Grid solved;
+    private Grid solvedGrid;
+    private boolean solved;
 
     public boolean solve(Grid grid){
         int bestRow = -1;
@@ -28,8 +26,9 @@ public class Solver {
         }
     
         if (bestRow == -1){
-            solved = grid;
-            return true;
+            solvedGrid = grid;
+            solved = grid.isSolved();
+            return solved;
         }
         
         return solve(bestRow, bestCol, grid.clone());
@@ -60,7 +59,8 @@ public class Solver {
                 }
     
                 if (bestRow == -1){
-                    solved = ng;
+                    solvedGrid = ng;
+                    solved = true;
                     return true;
                 }
     
@@ -70,10 +70,14 @@ public class Solver {
         return false;
     }
 
-    public Grid getSolved() {
+    public Grid getSolvedGrid() {
+        return solvedGrid;
+    }
+    
+    public boolean isSolved() {
         return solved;
     }
-
+    
     public boolean isCorrect(){
         return true;
     }

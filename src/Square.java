@@ -1,6 +1,3 @@
-package grid;
-
-
 import java.util.LinkedList;
 
 /**
@@ -50,8 +47,11 @@ public class Square {
     }
 
     public String toString(){
-        if (number == 0) return " ";
-        else return String.valueOf(number);
+        if (initial) return "  "+number+"  ";
+        else{
+            if (number == 0) return " [ ] ";
+            else return " ["+number+"] ";
+        }
     }
 
     public boolean setNumber(int number) {
