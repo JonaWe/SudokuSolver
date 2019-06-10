@@ -63,6 +63,21 @@ public class Grid {
         }
     }
 
+    public void updatePossibilities(){
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[r].length; c++) {
+                if (!grid[r][c].isInitial()){
+                    grid[r][c].removePossibilities();
+                    for (int num = 1; num < 10; num++) {
+                        if (isPossible(r, c, num)){
+                            grid[r][c].addPossibility(num);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public boolean isPossible(int row, int col, int number){
         //if (grid[row][col].isInitial()) return false;
 
@@ -112,5 +127,13 @@ public class Grid {
 
     public LinkedList<Integer> getPossibilities(int row, int col) {
         return grid[row][col].getPossibilities();
+    }
+    
+    public boolean hasNumber(int row, int col){
+        return grid[row][col].hasNumber();
+    }
+
+    public int numberOfPossibilities(int row, int col){
+        return grid[row][col].numberOfPossibilities();
     }
 }

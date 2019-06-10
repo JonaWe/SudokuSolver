@@ -7,21 +7,32 @@ import grid.Grid;
  */
 
 public class Solver {
-    Grid solved;
+    private Grid solved;
 
     public boolean solve(Grid grid){
-        int row = 0;
-        int col = 0;
-
-        while (grid.isInitial(row, col)){
-            if (col < 8) col++;
-            else {
-                col = 0;
-                if (row < 8) row++;
-                else return true;
+        int bestRow = -1;
+        int bestCol = -1;
+    
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (!grid.isInitial(r, c)){
+                    if (bestCol == -1){
+                        bestRow = r;
+                        bestCol = c;
+                    } else if(grid.numberOfPossibilities(bestRow, bestCol) > grid.numberOfPossibilities(r, c)){
+                        bestRow = r;
+                        bestCol = c;
+                    }
+                }
             }
         }
-        return solve(row, col, grid.clone());
+    
+        if (bestRow == -1){
+            solved = grid;
+            return true;
+        }
+        
+        return solve(bestRow, bestCol, grid.clone());
     }
 
     private boolean solve(int row, int col, Grid grid){
@@ -29,21 +40,31 @@ public class Solver {
             if (grid.isPossible(row, col, number)){
                 Grid ng = grid.clone();
                 ng.set(row, col, number);
-                int r = row;
-                int c = col;
-                do {
-                    if (c < 8) c += 1;
-                    else {
-                        c = 0;
-                        if (r < 8) r += 1;
-                        else{
-                            solved = ng;
-                            return true;
+                ng.updatePossibilities();
+    
+                int bestRow = -1;
+                int bestCol = -1;
+    
+                for (int r = 0; r < 9; r++) {
+                    for (int c = 0; c < 9; c++) {
+                        if (!ng.hasNumber(r, c)){
+                            if (bestCol == -1){
+                                bestRow = r;
+                                bestCol = c;
+                            } else if(ng.numberOfPossibilities(bestRow, bestCol) > ng.numberOfPossibilities(r, c)){
+                                bestRow = r;
+                                bestCol = c;
+                            }
                         }
                     }
-                } while (grid.isInitial(r, c));
-                System.out.println("row: "+row+" col: "+col+" number: "+number);
-                if (solve(r, c, ng)) return true;
+                }
+    
+                if (bestRow == -1){
+                    solved = ng;
+                    return true;
+                }
+    
+                if (solve(bestRow, bestCol, ng)) return true;
             }
         }
         return false;

@@ -32,6 +32,18 @@ public class Square {
     public LinkedList<Integer> getPossibilities() {
         return possibilities;
     }
+    
+    public boolean hasNumber(){
+        return number != 0;
+    }
+
+    public void removePossibilities(){
+        possibilities = new LinkedList<>();
+    }
+
+    public int numberOfPossibilities(){
+        return possibilities.size();
+    }
 
     public int getNumber() {
         return number;

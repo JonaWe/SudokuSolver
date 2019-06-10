@@ -32,8 +32,15 @@ public class Main {
     });*/
 
         Solver s = new Solver();
-        if (s.solve(g)) s.getSolved().printGrid();
-        else System.out.println("Sudoku is not solvable!");
+        long start = System.currentTimeMillis();
+        s.solve(g);
+        long end = System.currentTimeMillis();
+        System.out.println("time: "+(end-start));
+        s.getSolved().printGrid();
+
+
+        // 1. Version: ca. 85000 ms
+        // 2. Version: ca. 85 ms
 
     }
 }
